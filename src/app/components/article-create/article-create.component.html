@@ -1,0 +1,41 @@
+<div class="center">
+    <section id="content">
+
+        <h2 class="subheader">{{page_title}}</h2>
+
+        <form class="mid-form" #articleForm='ngForm' (ngSubmit)="onSubmit()" *ngIf="article"> <!--converir el formulario htmml en un formulario para angular con #userForm='ngForm' (#userForm es un ombre variable) y pasarle el evento (ngSubmit) llamando a un metodo del componete en este caso el metodo se llamo onSubmit-->
+            <div class="form-group">
+                <label for="title">Titulo</label>
+                <input type="text" name="title" #title="ngModel" [(ngModel)]="article.title" required > <!--por cada elemento que se enviara sedebe un atributo variable #xxx y decirle que sera un ngModel luego  luego usamos ladirectica bidireccional de  [(ngModel)] asignandole el atributo variable tipo ngModel, los required de html5 nos ayudan en las valdaciones de angular (propiedad valid/invalid) y el pattern="[A-Za-z ]+" nos ayuda a establecer un patron los nombres solo reciba caraceres alfabeticos para ser valido-->
+                <small class="active" *ngIf="!title.valid && title.touched">El campo es invalido o esta vacio</small> <!--gracias al required podemos saber si es valido asi que hacemso un condicional para mostrar el mensaje si es invalido y si se ha tocado-->
+
+            </div>
+            <div class="form-group">
+                <label for="content">Contenido</label>
+                <textarea name="content" #content="ngModel" [(ngModel)]="article.content" required></textarea>
+                <small class="active" *ngIf="!content.valid && content.touched">El campo es invalido o esta vacio</small>
+
+            </div>
+            <div class="form-group">
+                <!--label for="file">Imagen</label>
+                <input type="file" name="file0"-->
+                <div class="image-thumb" *ngIf="is_edit">
+                    <div class="image-wrap">
+                        <img src="{{url}}get-image/{{article.image}}" alt="{{article.title}}" *ngIf="article.image">
+                        <img src="../../../assets/images/image-no-image.png" alt="{{article.title}}"
+                            *ngIf="!article.image">
+                    </div>
+                </div>
+                <angular-file-uploader
+                    [config]="afuConfig"
+                    (ApiResponse)="imageUpload($event)">
+                </angular-file-uploader>
+            </div>
+            <div class="clearfix"></div>
+            <input type="submit" value="Guardar" [class]="articleForm.invalid ? 'btn btn-disabled':'btn btn-success'" [disabled]="articleForm.invalid" [title]="articleForm.invalid ? 'debe rellenar todos los campos':''"> <!--usamos operadores ternarios para mostrar un title y cambiar la clase del boton cuando sea invaldo y un condicional en disabled-->
+        </form>
+
+    </section>
+
+    <app-sidebar></app-sidebar>
+</div>

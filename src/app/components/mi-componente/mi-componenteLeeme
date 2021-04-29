@@ -1,0 +1,23 @@
+import { Component } from '@angular/core'; //importar el core de angular
+
+@Component({ //decorador para indicar caracteeristicas y propiedades
+    selector: 'mi-componente', //directiva (nombre de etiqueta html)}
+    template: `
+        <h1>{{titulo}}</h1>
+        <h2>{{comentario}}</h2>
+        <p>{{year}}</p>
+    ` //aqui se escribe lo que se quiera mostrar en el componente se puede hacer uso de las propiedades instaciadas en la clase del componente abajo con la interpolacion {{}}
+}) //no poner aqui ;
+export class MiComponente{ //se exporta el componente en una clase con un nombre (CamelCace por estandarizacion)
+    public titulo: string; //definir propiedades en la clase con modificador de acceso y tipo de dato
+    public comentario: string;
+    public year: number;
+    
+    constructor(){ //constructor esto mosntrara automaticamente el console.log apenas se cargue
+        this.titulo = "Hola mundo, soy mi compnente"; //inicalizar las propiedades
+        this.comentario = "este es mi primer componente"
+        this.year = 2021;
+        console.log("componete  mi-componete cargado")
+        console.log(`${this.titulo} ${this.comentario} ${this.year}`)
+    }
+}

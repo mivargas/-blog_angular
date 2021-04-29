@@ -1,0 +1,23 @@
+<div class="loading" *ngIf="!articles"> <!--efecto cargado mientreas llegan los articulsodel ap-->
+    <img src="https://media.tenor.com/images/7500668d515374c0dd15a7ed1e8bdbd8/tenor.gif" alt="cargando..">
+</div>
+
+<div class="loading" *ngIf="articles && articles.length == 0"> <!--util para el componente search que cuando no encuentra resultados devuelve un [] vacio-->
+    <h4>No se han encontrado articulos</h4>
+</div>
+
+<div id="article" *ngIf="articles">
+    <article class="article-item" id="item-template" *ngFor="let article of articles">
+        <div class="image-wrap">
+            <img src="{{url}}get-image/{{article.image}}" alt="{{article.title}}" *ngIf="article.image">
+            <img src="../../../assets/images/image-no-image.png" alt="{{article.title}}" *ngIf="!article.image">
+        </div>
+        <h2>{{article.title}}</h2>
+        <span class="date">
+            {{article.date | amLocale: 'es' | amTimeAgo}}
+            <!--Es pipe es de la libreria angular2 moment es para especificar hace cuanto tiempo-->
+        </span>
+        <a [routerLink]="'/blog/articulo/'+article._id">Leer más</a> <!-- es lo mismo que decir <a [routerLink]="['/blog/articulo', article._id]"> -->
+        <div class="clearfix"></div>
+    </article>
+</div>

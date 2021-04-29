@@ -1,0 +1,64 @@
+<app-slider [nombreSlider]="'Formulario'" [sizeSlider]="'small'">
+</app-slider>
+
+<div class="center">
+    <section id="content">
+
+        <h2 class="subheader">Formularios</h2>
+        <!--div id="datos-al-vuelo" *ngIf="user.nombre">
+            <h2 class="subheader">Datos al vuelo:</h2>
+            <ul>
+                <li>{{user.nombre}}</li>
+                <li>{{user.apellido}}</li>
+                <li>{{user.bio}}</li>
+                <li>{{user.genero}}</li>
+            </ul>
+        </div-->
+
+        <form class="mid-form" #userForm='ngForm' (ngSubmit)="onSubmit()"> <!--converir el formulario htmml en un formulario para angular con #userForm='ngForm' (#userForm es un ombre variable) y pasarle el evento (ngSubmit) llamando a un metodo del componete en este caso el metodo se llamo onSubmit-->
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="user.nombre" required pattern="[A-Za-zñÑ ]+"> <!--por cada elemento que se enviara sedebe un atributo variable #xxx y decirle que sera un ngModel luego  luego usamos ladirectica bidireccional de  [(ngModel)] asignandole el atributo variable tipo ngModel, los required de html5 nos ayudan en las valdaciones de angular (propiedad valid/invalid) y el pattern="[A-Za-z ]+" nos ayuda a establecer un patron los nombres solo reciba caraceres alfabeticos para ser valido-->
+                <small class="active" *ngIf="!nombre.valid && nombre.touched">El campo es invalido o esta vacio</small> <!--gracias al required podemos saber si es valido asi que hacemso un condicional para mostrar el mensaje si es invalido y si se ha tocado-->
+
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" #apellido="ngModel" [(ngModel)]="user.apellido" required pattern="[A-Za-zñÑ ]+">
+                <small class="active" *ngIf="!apellido.valid && apellido.touched">El campo es invalido o esta vacio</small>
+
+            </div>
+            <div class="form-group">
+                <label for="bio">Biografía</label>
+                <textarea name="bio" #bio="ngModel" [(ngModel)]="user.bio" required></textarea>
+                <small class="active" *ngIf="!bio.valid && bio.touched">El campo es invalido o esta vacio</small>
+
+            </div>
+            <div class="form-group radiobuttons">
+                <input type="radio" name="genero" value="hombre"#genero="ngModel" [(ngModel)]="user.genero" required>Hombre
+                <input type="radio" name="genero" value="mujer" #genero="ngModel" [(ngModel)]="user.genero">Mujer
+                <input type="radio" name="genero" value="otro" #genero="ngModel" [(ngModel)]="user.genero">Otro
+                <small class="active" *ngIf="!genero.valid && genero.touched">El campo es invalido o esta vacio</small>
+            
+            </div>
+            <div class="clearfix"></div>
+            <input type="submit" value="Enviar" [class]="userForm.invalid ? 'btn btn-disabled':'btn btn-success'" [disabled]="userForm.invalid" [title]="userForm.invalid ? 'debe rellenar todos los campos':''"> <!--usamos operadores ternarios para mostrar un title y cambiar la clase del boton cuando sea invaldo y un condicional en disabled-->
+        </form>
+
+        <h2 class="subheader">Eventos</h2><!--otros eventos-->
+        <button (click)='hasDadoClick()'>Dale click</button>
+        <input type="text" [(ngModel)]='campo' (blur)='hasSalido()' placeholder="salir">
+        {{campo}}
+
+        <input type="text" [(ngModel)]='campo2' (keyup.enter)='hasPresionado()' placeholder="enter">
+        {{campo2}}
+
+        <select (change)='hasCambiado()'>
+            <option>opcion 1</option>
+            <option>opcion 2</option>
+        </select>
+
+    </section>
+
+    <app-sidebar></app-sidebar>
+</div>

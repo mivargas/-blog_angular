@@ -1,0 +1,16 @@
+<aside id="sidebar">
+    <div id=nav-blog class="sidebar-item">
+        <h3>Puede hacer esto</h3>
+        <a [routerLink]="['/blog/crear']" class="btn btn-success">Crear articulo</a>
+    </div>
+
+    <div id="search" class="sidebar-item">
+        <h3>Buscador</h3>
+        <p>Encuentra el articuliculo que buscas</p>
+        <form #searchForm="ngForm" (ngSubmit)="goSearch()"> <!-- funcion para redireccionar al metodo buscar, NOTA: se puede remover el ngSubmit y colocar en el input un ngModelChange con el metodo goSearch() y se hara la busqueda al tipear los caracteres-->
+            <input type="text"  name="search" [(ngModel)]="stringSearch" > <!--en el modelo se ingresa el string a busar-->
+            <input type="submit" name="submit" value="Buscar" class="btn">
+        </form>
+    </div>
+</aside>
+<div class="clearfix"></div>

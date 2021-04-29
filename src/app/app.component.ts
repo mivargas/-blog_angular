@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'AprendiendoAngular';
+  title = 'Curso de angular web'; //se le puede poder un modificador de acceso private, protected, public
+  
 }

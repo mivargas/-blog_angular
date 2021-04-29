@@ -1,0 +1,8 @@
+<!--div id="slider" class="slider-big"-->
+<div id="slider" [ngClass]="{
+    'slider-big': !sizeSlider || sizeSlider == 'big',
+    'slider-small': sizeSlider == 'small'
+}"> <!--aqui se evalua que slider ddebe mostrar-->
+    <h1>{{nombreSlider}}</h1> <!--titulo por medio del decorador input (puede variar dependiendo la pagina)-->
+    <a [routerLink]="'/blog'" class="btn-white" *ngIf="!sizeSlider || sizeSlider== 'big'">Ir al blog</a> <!--aqui le decimos en el condicional que cuando el slider sea pequeños no se muestre-->
+</div>

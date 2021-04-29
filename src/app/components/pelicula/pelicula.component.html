@@ -1,0 +1,27 @@
+<article class="article-item" id="item-template">
+    <!--for para iterar-->
+    <div class="image-wrap">
+        <img src="{{pelicula.image}}" alt="{{pelicula.title}}">
+    </div>
+    <h2>{{indice+1}}.{{pelicula.title}}</h2>
+    <!--span  [style.background]="pelicula.year > 2016 ? 'green': 'red'"--->
+    <!--asi se aplican estilos con directivas (acompañado de un operador ternario que pintara de rojo el año d las peliculas cuya fecha sea menor a 2016)-->
+    <!--span [ngStyle]="{
+'background': pelicula.year > 2016 ? 'green': 'red'
+}"-->
+    <!--style con la directiva ngStyle -->
+    <!--span  [class.year-green]="pelicula.year > 2016" [class.year-red]="pelicula.year <= 2016"-->
+    <!--se recomienda hacerlo por clases -->
+    <span [ngClass]="{
+'year-green': pelicula.year > 2016,
+'year-red': pelicula.year <= 2016
+}">
+        <!--class con la directiva ngClass este es el metodo recomendado -->
+        {{pelicula.year}}
+    </span>
+    <a href="">Leer más</a>
+
+    <button (click)='seleccionar($event, pelicula)'>Seleccionar como fabortita</button> <!--0 se invoca el evento clic donde se envian los datos del objeto pelicula-->
+
+    <div class="clearfix"></div>
+</article>

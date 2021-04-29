@@ -1,0 +1,26 @@
+<app-slider 
+    [nombreSlider]="'Página'"
+    [sizeSlider]="'small'"
+
+>
+</app-slider>
+
+<div class="center">
+    <section id="content">
+        <h2 class="subheader">Página de pruebas</h2>
+        <div *ngIf='nombre; else elseNombre'>
+            <!--asi ese declara un else llamando aun bloque template que mostrar en caso de que no se cumpla la condicion-->
+            <h2>El nombre es {{nombre}}</h2>
+        </div>
+        <ng-template #elseNombre>
+            <!--este es el bloque que mostrar cuando no se cumpla la condicion principal (se llama #elseNombre declarado arriba)-->
+            <h2>No hay nombre para mostrar</h2>
+        </ng-template>
+
+        <!--button (click)='redireccion()'>LLevame al formulario</button-->
+        <button (click)='redireccion()'>reeviame con nombre</button>
+
+    </section>
+
+    <app-sidebar></app-sidebar>
+</div>

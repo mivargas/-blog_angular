@@ -1,0 +1,53 @@
+<app-slider 
+[nombreSlider]="'Peliculas'"
+[sizeSlider]="'small'"
+>
+</app-slider>
+
+<div class="center">
+    <section id="content">
+
+        <div id="favorita" *ngIf="favorita"> <!--5 aqui se muestra la propiedad que llego desde el hijo por medio del output, se debe hacer un if para evitar errores cuando no haya pelicualas favoritas-->
+            <h2>Pelicula favorita seleccionada</h2>
+            <h4>{{favorita.title | uppercase}}</h4> <!--estos son pipes, convierte todo a mayusculo. lowercase es para minusculas-->
+            <h4>El año {{favorita.year}} {{favorita.year |espar }}</h4> <!--esto es un pipe personalizado se crea una capeta pipes en app  y se crea un archivo ts y se importa la clase alli creada en app module-->
+            <h5>{{fecha | date: 'dd/MM/yyyy'}}</h5><!--pipe de fecha puede ser con el parametro full fullDate o short-->
+        </div>
+
+        <h2 class="subheader">Peliculas</h2>
+        <h2>{{titulo}}</h2>
+        <p>peliculas works!</p>
+        <button (click)="cambiarTitulo()">Pulsame</button>
+        <hr>
+        <h2>Mostrar primera pelicula</h2>
+        {{peliculas[0].title}}
+        <hr>
+
+        <h2>Numero de peliculas</h2>
+
+        <span *ngIf="peliculas.length <= 3; else elsePeliculas">
+            hay pocas peliculas:
+        </span>
+
+        <ng-template #elsePeliculas>
+            <span>peliculas:</span>
+        </ng-template>
+
+        {{peliculas.length}}
+        <hr>
+
+        <h2 class="subheader">Listado de peliculas</h2>
+        <div id="article" *ngIf="peliculas">
+            <div *ngFor="let pelicula of peliculas; let i  = index"> 
+                <app-pelicula 
+                [indice]="i" [pelicula]="pelicula"
+                (marcarFavorita)="mostrarFavorita($event)"
+                ></app-pelicula> <!--se separo el componente para modualrizar alli se crea la pelicula y de ser una lista se usa el modelo pelicula en el component ts se pasa el indice en una propiedad aparte de input tambien (@input de padre a hijo [pelicula] (peliculas a pelicula)  )--> <!--se necesita para pasar datos del hijo al padre (marcarFavorita)(@output de hijo a padre(pelicula a pelicualas))-->
+                <!--2 se recibe el evento emitido especificandolo (marcarFavorita) y se le asigna un metodo con el parametro $event para que lo reciba el componete padre y pueda usar el objeto mostrarFavorita($event)-->
+            </div>
+        </div>
+
+    </section>
+
+    <app-sidebar></app-sidebar>
+</div>
